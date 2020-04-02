@@ -7,10 +7,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ExempleController {
 	
-	@GetMapping("/recupereralertes")
-	public String postUnElementDeco() {
+	@GetMapping("/ok")
+	public String getUnOk() {
 		
 		return "ok";
+	}
+	
+	@GetMapping("/pasok")
+	public String getUnPasOk() {
+		
+		return "pasok";
 	}
 
 }
