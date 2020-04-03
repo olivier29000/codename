@@ -25,7 +25,7 @@ public class LieuController {
 		return lieuService.mettreEnBaseLieu(lieu);
 	}
 	
-	@GetMapping("obtenirLalisteDesLieux")
+	@GetMapping("/obtenirLalisteDesLieux")
 	public List<Lieu> getObtenirLalisteDesLieux() {
 		
 		return lieuService.obtenirLalisteDesLieux();
