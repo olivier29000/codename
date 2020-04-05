@@ -24,17 +24,22 @@ public class PartieController {
 	@Autowired
 	PartieService partieService;
 
-	@GetMapping("/obtenirMaCarte")
+	@GetMapping("/obtenirMaCarteAgentTrouble")
 	public String obtenirMaCarte(@RequestParam String nomJoueur,  String nomPartie) {
 		return partieService.obtenirMaCarte(nomJoueur,nomPartie);
 	}
 	
 	@PostMapping(path = "/creerUnePartie", consumes = "application/json", produces = "application/json")
 	public String creerUnePartie(@RequestBody PartiePost partiePost) {
-		Partie partie = new Partie(partiePost.getNomPartie(), partiePost.getNomLieu(),partiePost.getListeDeNomsJoueurs());
+		Partie partie = new Partie(partiePost.getNomPartie(),partiePost.getListeDeNomsJoueurs());
 		
 		partieService.mettreEnBaseUnePartie(partie);
 		
 		return "ok";
+	}
+	
+	@GetMapping("/obtenirLalisteDesParties")
+	public List<Partie> obtenirLalisteDesParties() {
+		return partieService.obtenirLalisteDesParties();
 	}
 }

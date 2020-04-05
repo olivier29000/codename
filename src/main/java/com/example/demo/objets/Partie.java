@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.demo.services.LieuService;
 import com.example.demo.utils.Utils;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +26,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Partie {
+	
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +38,11 @@ public class Partie {
 	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<Joueur> listeDeJoueurs;
 	
-	public Partie(String nomPartie, String nomLieu, List<String> listeDeNomJoueurs) {
+	public Partie(String nomPartie,  List<String> listeDeNomJoueurs) {
+		
+		
+		LieuService lieuService = new LieuService();
+		this.nomLieu = lieuService.determinerUnLieuAuHasard();
 		
 		List<Joueur> listeDesJoueurs = new ArrayList<Joueur>();
 		Integer randomInt = Utils.getRandomNumberInRange(0, listeDeNomJoueurs.size() - 1);
@@ -49,10 +58,10 @@ public class Partie {
 			compteur++;
 			listeDesJoueurs.add(new Joueur(nomJoueur,role));
 		}
-		this.nomLieu = nomLieu;
 		this.nomPartie = nomPartie;
 		this.listeDeJoueurs = listeDesJoueurs;
 	}
+
 	
 
 }
